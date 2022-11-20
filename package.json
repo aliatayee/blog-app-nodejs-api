@@ -1,0 +1,27 @@
+{
+  "dependencies": {
+    "dotenv": "^16.0.3",
+    "express": "^4.18.2",
+    "mongoose": "^6.7.2",
+    "multer": "^1.4.5-lts.1",
+    "nodemon": "^2.0.20"
+  },
+  "name": "blog-app-nodejs-api",
+  "description": "The `BLOG APP` is a web REST API application based on Nodejs and Reactjs.",
+  "version": "1.0.0",
+  "main": "index.js",
+  "devDependencies": {},
+  "scripts": {
+    "start": "nodemon index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/aliatayee/blog-app-nodejs-api.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/aliatayee/blog-app-nodejs-api/issues"
+  },
+  "homepage": "https://github.com/aliatayee/blog-app-nodejs-api#readme"
+}
