@@ -1,8 +1,8 @@
 const router = require("express").Router();
 const Category = require("../models/Category");
-
+const auth = require("../middleware/auth")
 //GET CATEGORIES
-router.get("/", async (req, res) => {
+router.get("/", auth, async (req, res) => {
     try {
         const category = await Category.find();
         res.status(200).json(category);
@@ -12,7 +12,7 @@ router.get("/", async (req, res) => {
 });
 
 //CREATE CATEGORY
-router.post("/", async (req, res) => {
+router.post("/", auth, async (req, res) => {
     const category = new Category(req.body);
     try {
         const savedCategory = await category.save();
@@ -23,7 +23,7 @@ router.post("/", async (req, res) => {
 });
 
 //UPDATE CATEGORY
-router.put("/:id", async (req, res) => {
+router.put("/:id", auth, async (req, res) => {
     try {
         const updateCategory = await Category.findByIdAndUpdate(req.params.id, { $set: req.body }, { new: true });
         res.status(200).json(updateCategory);
@@ -33,7 +33,7 @@ router.put("/:id", async (req, res) => {
 });
 
 //DELETE CATEGORY
-router.delete("/:id", async (req, res) => {
+router.delete("/:id", auth, async (req, res) => {
     try {
         try {
             const category = await Category.findById(req.params.id);
