@@ -14,6 +14,7 @@ app.use(express.json());
 mongoose.connect(process.env.MONGODB_URL)
     .then(console.log("Connected to mongo"))
     .catch((err) => console.log(err));
+    
 const storage = multer.diskStorage({
     destination: (req, file, cb) => {
         cb(null, "assets/images")
@@ -32,6 +33,8 @@ app.use("/api/users", usersRoute);
 app.use("/api/posts", postsRoute);
 app.use("/api/categories", categoriesRoute);
 
-app.listen("5000", () => {
-    console.log("Backend is running");
+const { API_PORT } = process.env;
+const port = process.env.PORT || API_PORT;
+app.listen(port, () => {
+    console.log(`Server running on port ${port}`);
 })
