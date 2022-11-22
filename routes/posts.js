@@ -1,8 +1,9 @@
 const router = require("express").Router();
 const Post = require("../models/Post");
+const auth = require("../middleware/auth")
 
 //GET ALL POSTS
-router.get("/", async (req, res) => {
+router.get("/", auth, async (req, res) => {
     const username = req.query.username;
     const categories = req.query.categories;
     try {
@@ -22,7 +23,7 @@ router.get("/", async (req, res) => {
 });
 
 //CREATE POST
-router.post("/", async (req, res) => {
+router.post("/", auth, async (req, res) => {
     const newPost = new Post(req.body);
     try {
         const savedPost = await newPost.save();
@@ -33,7 +34,7 @@ router.post("/", async (req, res) => {
 });
 
 //UPDATE POST
-router.put("/:user/:id", async (req, res) => {
+router.put("/:user/:id", auth, async (req, res) => {
     if (req.body.username === req.params.user) {
         try {
             const updatePost = await Post.findByIdAndUpdate(req.params.id, { $set: req.body }, { new: true });
@@ -47,7 +48,7 @@ router.put("/:user/:id", async (req, res) => {
 });
 
 //DELETE POST
-router.delete("/:user/:id", async (req, res) => {
+router.delete("/:user/:id", auth, async (req, res) => {
     const post = await Post.findById(req.params.id);
     try {
         if (post.username === req.params.user) {
